@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordenando</title>
+    <script src="ordenando.js" defer></script>
+</head>
+<body>
+    <h1>Ordenação de Números</h1>
+    <input type="number" id="valor" placeholder="Digite um número">
+    <button onclick="add()">Adicionar</button>
+    <select id="metodoOrdenacao">
+        <option value="bubble_sort" selected>Bubble Sort</option>
+        <option value="selection_sort">Selection Sort</option>
+        <option value="quick_sort">Quick Sort</option>
+    </select>
+    <button onclick="ordenar()">Ordenar</button>
+    <button onclick="misturar()">Misturar</button>
+    <ul id="valores"></ul>
+
+    <script>
+        const valores = [];
+
+        function add() {
+            const valorInput = document.getElementById('valor');
+            const valor = parseInt(valorInput.value);
+            if (!isNaN(valor)) {
+                valores.push(valor);
+                const node = document.createElement('li');
+                node.textContent = valor;
+                document.getElementById('valores').appendChild(node);
+                valorInput.value = '';
+            }
+        }
+
+        function ordenar() {
+            const metodo = document.getElementById('metodoOrdenacao').value;
+            let sortedArray;
+            switch (metodo) {
+                case 'bubble_sort':
+                    sortedArray = [...valores];
+                    bubble_sort(sortedArray);
+                    break;
+                case 'selection_sort':
+                    sortedArray = [...valores];
+                    selection_sort(sortedArray);
+                    break;
+                case 'quick_sort':
+                    sortedArray = [...valores];
+                    quick_sort(sortedArray, 0, sortedArray.length - 1);
+                    break;
+            }
+            document.getElementById('valores').innerHTML = '';
+            sortedArray.forEach(num => {
+                const node = document.createElement('li');
+                node.textContent = num;
+                document.getElementById('valores').appendChild(node);
+            });
+        }
+
+        function misturar() {
+            const valoresClone = [...valores];
+            shuffle(valoresClone, 10);
+            document.getElementById('valores').innerHTML = '';
+            valoresClone.forEach(num => {
+                const node = document.createElement('li');
+                node.textContent = num;
+                document.getElementById('valores').appendChild(node);
+            });
+        }
+    </script>
+</body>
+</html>

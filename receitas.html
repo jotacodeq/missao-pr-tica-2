@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Receitas</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-warning">
+    <div class="container-fluid">
+        <h1 class="text-center">Catálogo de Receitas</h1>
+        <div id="pnlCatalogo" class="d-flex flex-wrap"></div>
+    </div>
+
+    <script>
+        const receitas = [
+            {
+                titulo: "Bolo De Chocolate",
+                imagem: "imagem/receita1.png",
+                preparo: "PARA A MASSA DO BOLO 1.Em um recipiente, bata os ovos, o açúcar, a Margarina Doriana com Sal até formar um creme; 2.Com uma peneira, adicione a farinha de trigo aos poucos, depois o chocolate em pó e o fermento. Acrescente o leite e misture até formar uma massa lisa;3.Despeje a massa em uma forma untada com margarina e asse em forno médio-alto 200°C, preaquecido, por 40 minutos; 4.Desenforme ainda quente.",
+                ingredientes: ["2 ovos,1 e 1/2 xícara chá de açúcar,2 xícaras chá de farinha de trigo,1 xícara chá de chocolate em pó ou achocolatado,2 colheres de sopa de Margarina Doriana com Sal,1 colher sopa de fermento em pó,1 pitada de sal,1 xícara chá de leite"]
+            },
+            {
+                titulo: "Brownie simples e rápido",
+                imagem: "imagem/receita3.jpg",
+                preparo: "1.Derreta a manteiga e reserve,2.Enquanto derrete a manteiga, misture os 3 ovos e a açúcar e misture bem,3.Acrescente a manteiga derretida no ovo e o açúcar,4.Agora é so misturar o achocolatado e o trigo,5.Unte uma forma com manteiga e achocolatado,6.Leve ao forno a 180° C por 30 minutos",
+                ingredientes: ["1.  1.5 colheres de manteiga,2.   3 xicara de achocolatado,3    .12 colheres de farinha de trigo, 4.   3 ovos,  5.    6 colheres de açúcar "]
+                
+            },
+            {
+                titulo: "Cuscuz",
+                imagem: "imagem/receita2.jpg",
+                preparo: "1.Em um recipiente, misture a farinha de flocos de milho e umedeça com a água. Junte também o sal. E deixe descansar por 20 minutos  2.Coloque a mistura em uma cuscuzeira e cozinhe o cuscuz no vapor. Caso não tenha a cuscuzeira, molde um punhado de cuscuz em um prato de sobremesa, formando um meio círculo; envolva o prato e o cuscuz, com um pano, formando uma trouxinha; vire o prato em uma panela com 2 dedos de água e leve ao fogo para que cozinhe no vapor por, aproximadamente, 20 minutos     3.Misture a Manteiga com a pimenta e o coentro e sirva com o cuscuz quente.",
+                ingredientes: ["2 xícaras (chá) de flocos de milho 1 xícara (chá) de água, 1 colher (chá) de sal ,4 colheres (sobremesa) de manteiga ,1 colher (sopa) de pimentas biquinho em conserva bem picadas,Coentro picado a gosto "]
+                
+            },
+            {
+                titulo: "Peixe Grelhado C/legumes",
+                imagem: "imagem/receita4.jpg",
+                preparo: "1.  Tempere o peixe apenas com o sal e a pimenta-do-reino e reserve, 2.  Corte os legumes à Julienne (palitos finos e uniformes),3.   Aqueça uma frigideira, derreta a manteiga, refogue a cebola e adicione os legumes e refogue bem., 4.   Em outra frigideira, doure o azeite e grelhe os filés, 5.     Sirva com os legumes.",
+                ingredientes: ["1.   2 unidades de filés de peixe vermelho, 2.  1 unidade de abobrinha, 3.   1 cebola picada, 4.    azeite, sal e pimenta-do-reino a gosto, 5.   1 unidade de cenoura, 6.   vagem, 7.    1 colher de sopa de manteiga "]
+                
+            }
+           
+           
+
+
+
+
+            
+        ];
+
+        const getListaIngredientes = (receita) => {
+            let texto = '<ul>';
+            texto += receita.ingredientes.map(ingrediente => `<li>${ingrediente}</li>`).join('');
+            texto += '</ul>';
+            return texto;
+        };
+
+        const getCard = (receita) => {
+            return `
+                <div class="card" style="width: 250px;">
+                    <img src="${receita.imagem}" class="card-img-top" alt="${receita.titulo}">
+                    <div class="card-body">
+                        <h5 class="card-title">${receita.titulo}</h5>
+                        <div class="card-text">${getListaIngredientes(receita)}<hr>${receita.preparo}</div>
+                    </div>
+                </div>
+            `;
+        };
+
+        const preencheCatalogo = () => {
+            const pnlCatalogo = document.getElementById('pnlCatalogo');
+            pnlCatalogo.innerHTML = receitas.map(getCard).join('');
+        };
+
+        window.onload = preencheCatalogo;
+    </script>
+</body>
+</html>
